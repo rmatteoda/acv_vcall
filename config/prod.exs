@@ -20,7 +20,7 @@ config :acv_demo, AcvDemoWeb.Endpoint,
 config :logger, level: :info
 
 # Configure your database
-config :acv_demo, AcvDemoWeb.Repo,
+config :acv_demo, AcvDemo.Repo,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
