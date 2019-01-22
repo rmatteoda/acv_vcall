@@ -10,20 +10,23 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :acv_demo, AcvDemoWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [scheme: "https", host: "desolate-plateau-99973.herokuapp.com/", port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  load_from_system_env: true,
+  url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
+  server: true,
+  secret_key_base: "${SECRET_KEY_BASE}"
+
 
 # Do not print debug messages in production
 config :logger, level: :info
 
 # Configure your database
 config :acv_demo, AcvDemo.Repo,
-  url: System.get_env("DATABASE_URL"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl: true
+  adapter: Ecto.Adapters.Postgres,
+  url: "${DATABASE_URL}",
+  database: "",
+  ssl: true,
+  pool_size: 1
 
 # ## SSL Support
 #
